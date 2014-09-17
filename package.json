@@ -11,7 +11,11 @@
     "url": "git://github.com/sunya9/Maki.git"
   },
   "dependencies" : {
-    "express" : "4.x"
+    "express" : "4.x",
+    "underscore" : "*",
+    "async" : "*",
+    "grunt" : "*",
+    "ect" : "*"
   },
   "author": "_X_y_z_",
   "license": "ISC",
