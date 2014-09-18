@@ -7,7 +7,7 @@ var bodyParser = require('body-parser');
 var http = require('http');
 var ect = require('ect');
 var socketIO = require('socket.io');
-var init = require('./lib/init');
+var settings = require('./lib/init');
 
 // api endpoint
 var upload = require('./routes/upload');
@@ -49,7 +49,7 @@ app.use(function(req, res, next) {
     next(err);
 });
 
-init();
+var pref = new settings('settings.json');
 
 // error handlers
 
