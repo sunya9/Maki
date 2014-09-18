@@ -16,7 +16,8 @@
     "underscore": "~1.7.0",
     "async": "~0.9.0",
     "grunt": "~0.4.5",
-    "ect": "~0.5.9"
+    "ect": "~0.5.9",
+    "socket.io" : "~1.1.0"
   },
   "description": "Maki is web client music player with mpd.",
   "repository": {

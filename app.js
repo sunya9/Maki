@@ -4,7 +4,10 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var http = require('http');
 var ect = require('ect');
+var socketIO = require('socket.io');
+var init = require('./lib/init');
 
 // api endpoint
 var upload = require('./routes/upload');
@@ -45,6 +48,8 @@ app.use(function(req, res, next) {
     err.status = 404;
     next(err);
 });
+
+init();
 
 // error handlers
 
