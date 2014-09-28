@@ -11,10 +11,14 @@
 	<script src="js/main.js"></script>
 </head>
 <body>
-	<form>
+	<form id="test">
 		<input type="text" id="message" name="message" />
 		<input type="submit" value="Send" />
 	</form>
 	<output id="receive"></output>
+	<form action="/upload" method="post" enctype="multipart/form-data" id="upload">
+		<input type="file" multiple accept="audio/*" name="files" id="files" />
+		<input type="submit" />
+	</form>
 </body>
 </html>

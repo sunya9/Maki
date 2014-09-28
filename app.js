@@ -1,3 +1,4 @@
+
 var express = require('express');
 var path = require('path');
 var favicon = require('serve-favicon');
@@ -7,10 +8,12 @@ var bodyParser = require('body-parser');
 var http = require('http');
 var ect = require('ect');
 var socketIO = require('socket.io');
+var multer = require('multer');
 var settings = require('./lib/init');
+var apiRouter = require('./lib/api_router');
 
 // api endpoint
-var upload = require('./routes/upload');
+// var upload = require('./routes/upload');
 
 // create instance
 var app = express();
@@ -35,12 +38,17 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
     extended: false
 }));
+app.use(multer({
+    dest: './musics'
+}))
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 
 // set routing
-app.use('/upload', upload);
+// app.use('/upload', upload.);
+apiRouter(app);
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
