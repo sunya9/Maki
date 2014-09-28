@@ -1,1 +1,5 @@
-{"music_folder":"./musics/","status":1}
+{
+	"music_folder": "./musics",
+	"status": 1,
+	"db_name" : "maki"
+}
