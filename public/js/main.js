@@ -17,5 +17,14 @@
       return false;
     });
 
+    $.getJSON("./get", function(data, status){
+      if(status !== 200)
+        return console.error("status code is " + status);
+        _.each(data, function(music){
+          console.log(music);
+          $("</p>").text(music).appendTo("output");
+        });
+    })
+
   });
 }(jQuery));
