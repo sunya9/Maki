@@ -1,4 +1,3 @@
-
 var express = require('express');
 var path = require('path');
 var favicon = require('serve-favicon');
@@ -12,7 +11,8 @@ var multer = require('multer');
 var settings = require('./lib/init');
 var apiRouter = require('./lib/api_router');
 var dbWrapper = require('./lib/api/db_wrapper');
-
+var fs = require('fs');
+var _ = require('underscore');
 
 // create instance
 var app = express();
@@ -35,7 +35,7 @@ app.set('view engine', 'ect');
 
 var pref = new settings('settings.json');
 app.use(multer({
-    dest: pref.prefs.music_folder 
+    dest: pref.prefs.music_folder
 }));
 
 apiRouter(app);
@@ -49,10 +49,13 @@ app.use(bodyParser.urlencoded({
     extended: false
 }));
 
+app.set('public', path.join(__dirname, 'public'));
+app.set('static js', '/js/');
+app.set('static css', '/css/');
 
 
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(app.get('public')));
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

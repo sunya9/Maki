@@ -1,30 +1,53 @@
-(function($) {
+(function(window) {
+  var root = window;
+  root.App = {
+    Models: {},
+    Collections: {},
+    Views: {},
+    Classes: {},
+
+    WEB_SOCKET_URL: "http://localhost",
+  };
+
   $(function() {
-    var socket = io('http://localhost');
-    socket.on('s2c', function(data) {
-    $("</p>").text(data.message).appendTo("output#receive");
-    }); 
+
+    App.Views.Window = Backbone.View.extend({
+      initialize: function(options) {
+        _.bindAll(this, "render");
+
+        this.allMusicCollection = new App.Collections.Playlist({
+          first_boot: true
+        });
+
+        this.$playlistsWrapper = this.$("div#playlists_wrapper");
+        this.$main = $("main#main");
+
+
+        this.allMusicCollection.fetch({
+          first_boot: true
+        });
+      }
+    });
+    App.Models.Window = Backbone.Model.extend({
+
+    });
+    var appView = new App.Views.Window();
+    var client = new App.Classes.Client();
+    client.connect();
 
     $("form#test").submit(function(e) {
       e.preventDefault();
       var $message = $("input[type='text']#message");
       var data = $message.val();
       $message.val("");
-      socket.emit("c2s", {
+      client.emit("c2s", {
         message: data
       });
-
       return false;
     });
 
-    $.getJSON("./get", function(data, status){
-      if(status !== 200)
-        return console.error("status code is " + status);
-        _.each(data, function(music){
-          console.log(music);
-          $("</p>").text(music).appendTo("output");
-        });
-    })
-
+    client.setListener("s2c", function(data) {
+      $("</p>").text(data.message).appendTo("output#receive");
+    });
   });
-}(jQuery));
+}(this));
