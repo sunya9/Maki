@@ -38,8 +38,8 @@ app.use(multer({
     dest: pref.prefs.music_folder
 }));
 
-apiRouter(app);
 dbWrapper.init(pref.prefs.db_name);
+
 
 // uncomment after placing your favicon in /public
 //app.use(favicon(__dirname + '/public/favicon.ico'));
@@ -49,6 +49,7 @@ app.use(bodyParser.urlencoded({
     extended: false
 }));
 
+
 app.set('public', path.join(__dirname, 'public'));
 app.set('static js', '/js/');
 app.set('static css', '/css/');
@@ -56,6 +57,8 @@ app.set('static css', '/css/');
 
 app.use(cookieParser());
 app.use(express.static(app.get('public')));
+
+apiRouter(app);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -87,6 +90,5 @@ app.use(function(err, req, res, next) {
         error: {}
     });
 });
-
 
 module.exports = app;
