@@ -9,7 +9,7 @@
     //   else
     //     return new App.Models.Music(attrs, options);
     // },
-    model : App.Models.RealMusic,
+    model: App.Models.RealMusic,
     url: "/musics",
 
     initialize: function(models, options) {
@@ -32,14 +32,17 @@
       return res;
     },
 
+    MUSIC_FIELDS: ["title", "artist", "album_artist", "album"],
+
+
     filterMusic: function(searchStr) {
       var result = App.Utils.searchQueryParser(searchStr, App.SEARCH_OPERATOR_OPTIONS);
-      var fields = ["title", "artist", "album_artist", "album"];
+      var self = this;
       var existSearchOperator = _.isObject(result);
       var text = existSearchOperator ? result.text : result;
       text && (text = text.toLowerCase());
       var setVisibilityIteratee = function(musicModel) {
-        var isVisible = !!text ? _.some(fields, function(field) {
+        var isVisible = !!text ? _.some(self.MUSIC_FIELDS, function(field) {
           return musicModel.get(field).toLowerCase().indexOf(text) >= 0;
         }) : true;
         musicModel.set("visible", isVisible);
@@ -47,7 +50,7 @@
       if (existSearchOperator) {
         var isVisible = _.chain(this.models)
           .filter(function(model) {
-            var modelAttrs = model.pick(fields);
+            var modelAttrs = model.pick(self.MUSIC_FIELDS);
             var isVisible = _.chain(result)
               .omit("text")
               .every(function(resultValue, resultKey) {

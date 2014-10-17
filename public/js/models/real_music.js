@@ -4,8 +4,8 @@ App.Models.RealMusic = App.Models.Music.extend({
 
   initialize: function(attrs, options) {
     console.log("music model initialize.");
-    // console.log("music model attrs", attrs);
-    // console.log("music model options", options);
+    console.log("music model attrs", attrs);
+    console.log("music model options", options);
     console.info("music model title", this.attributes.title);
   },
 

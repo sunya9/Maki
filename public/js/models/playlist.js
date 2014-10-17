@@ -21,19 +21,21 @@
         // fetchOptions.add = true;
         this.attributes.musics.fetch(fetchOptions);
       } else {
-        attrs.musics = _.isEmpty(attrs.musics) ? [] : attrs.musics;
+        // attrs.musics = _.isEmpty(attrs.musics) ? [] : attrs.musics;
+        attrs.musics || ( attrs.musics = []);
         var options = _.omit(attrs.musics, "musics");
         this.attributes.musics = new App.Collections.Music(attrs.musics, options);
       }
     },
-
+ 
     defaults: function() {
       return {
-        'title': 'No title',
-        'user': null,
-        'musics': null,
-        'count': 0,
-        'removable': true
+        title: 'No title',
+        user: null,
+        musics: null,
+        count: 0,
+        removable: true,
+        target_select : false,
       }
     },
 

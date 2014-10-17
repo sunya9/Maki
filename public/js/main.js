@@ -75,11 +75,21 @@
       this.currentPlaylist = root.playlistCollection.first();
       this.$main = $("main#main");
 
-      var client = new App.Classes.Client();
-      client.connect();
-      client.setListener("s2c", function(data) {
-        this.collection.trigger("onStartUpload");
+      var self = this;
+      this.client = new App.Classes.Client();
+      this.client.connect();
+      this.client.setListener("s2c", function(data) {
         $("</p>").text(data.message).appendTo("output#receive");
+      });
+      $("form#test_form").submit(function(e) {
+        e.preventDefault();
+        var $message = $("input[type='text']#message");
+        var data = $message.val();
+        $message.val("");
+        self.client.emit("c2s", {
+          message: data
+        });
+        return false;
       });
       this.queue = new App.Utils.Queue();
     },
@@ -107,17 +117,6 @@
   });
   $(function() {
     root.appView = new App.Views.Window();
-  });
-
-  $("form#test_form").submit(function(e) {
-    e.preventDefault();
-    var $message = $("input[type='text']#message");
-    var data = $message.val();
-    $message.val("");
-    client.emit("c2s", {
-      message: data
-    });
-    return false;
   });
 
 }(this));

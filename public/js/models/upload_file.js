@@ -7,8 +7,9 @@ App.Models.UploadFile = Backbone.Model.extend({
     complete: false,
     progress: 0,
     duplicate: false,
-    files : null,
+    files: null,
     type: "",
+    playlists: []
   },
 
   onProgress: function(currentProgress) {

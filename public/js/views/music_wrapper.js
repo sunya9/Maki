@@ -24,13 +24,19 @@
       _.bindAll(this, "render", "renderOne", "remove");
       this.filterCollection = _.debounce(this._filterCollection, 300);
       var self = this;
-      this.$currentMusicList = $("ol#musiclist", this.$el);
-      this.$muslistFilterForm = $("form#musiclist_filter_form", this.$el);
-      this.$musiclistFilterInput = $("input#musiclist_filter_text", this.$muslistFilterForm);
+      this.$currentMusicList = this.$("ol#musiclist");
+      this.$muslistFilterForm = this.$("form#musiclist_filter_form");
+      this.$musiclistFilterInput = this.$("input#musiclist_filter_text", this.$muslistFilterForm);
       this.listenToOnce(this.collection, "sync", function() {
         self.changeMusiclist();
         return this;
       })
+      this.client = new App.Classes.Client();
+      this.client.setListener("music:create", function(result) {
+        var music = result.music;
+        var playlists = result.playlist;
+        root.playlistCollection.requestInsertMusic(music, playlists);
+      });
     },
 
     resetFilterForm: function(e) {

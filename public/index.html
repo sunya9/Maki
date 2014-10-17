@@ -6,7 +6,7 @@
 </head>
 <body>
 <div id="container" role="application">
-  <form id="test_from">
+  <form id="test_form">
     <input type="text" id="message" name="message" />
     <input type="submit" value="Send" />
   </form>
@@ -55,6 +55,11 @@
 
           </ul>
         </div>
+        <div id="target_playlist_list_wrapper">
+          <ul id="target_playlist_list">
+
+          </ul>
+        </div>
          <form action="/musics" method="POST" enctype="multipart/form-data" id="upload_music_form">
             <span><input type="text" name="user" id="upload_user_id" value="xyz" /></span>
           <span><input type="file" multiple accept="audio/*" name="files" id="upload_audio_files" /></span>
@@ -92,7 +97,9 @@
     <span class="upload_file_title"><%- name  %></span>
     <span class="upload_file_size"><%- size %></span>
     <progress class="upload_file_progress" value="<%- progress %>"></progress>
-    <a class="cancel_upload_file">Cancel</a>
+    <% if(!complete){ %>
+      <a class="cancel_upload_file">Cancel</a>
+    <% } %>
   </script>
   <script src="js/bower_components/jquery/dist/jquery.min.js"></script>
   <script src="js/bower_components/underscore/underscore-min.js"></script>

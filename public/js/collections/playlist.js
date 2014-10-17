@@ -12,4 +12,14 @@ App.Collections.Playlist = Backbone.Collection.extend({
     })
   },
 
+  requestInsertMusic : function(music, ids){
+    var allMusicId = _.first(this.models).id;
+    ids.push(allMusicId);
+    _.each(this.models, function(model){
+      if(_.contains(ids, model.id)){
+      model.get("musics").add(music);
+      }
+    });
+  }
+
 });
