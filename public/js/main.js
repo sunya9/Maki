@@ -55,6 +55,7 @@
         title: "All Music",
         user: App.ROOT_USER,
         real: true,
+        _id: 0
       }], {
         add: true,
         validate: true,

@@ -33,8 +33,9 @@
       })
       this.client = new App.Classes.Client();
       this.client.setListener("music:create", function(result) {
+        console.log("result:", result);
         var music = result.music;
-        var playlists = result.playlist;
+        var playlists = result.playlists;
         root.playlistCollection.requestInsertMusic(music, playlists);
       });
     },

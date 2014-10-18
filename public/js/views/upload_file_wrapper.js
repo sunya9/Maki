@@ -26,9 +26,11 @@
     },
 
     show: function() {
+      if (this.visible) return;
       this.playlistCollection.each(function(model) {
         model.set("target_select", false);
       });
+      this.visible = true;
     },
 
     render: function() {
@@ -94,14 +96,14 @@
       e.preventDefault();
       var user = this.$uploadUserName.val();
       if (!user) return false;
-      var targetPlaylists = this.playlistCollection.chain().filter(function(playlist) {
-        return playlist.get("target_select");
-      }).pluck("id").value();
+      var targetPlaylists = this.playlistCollection.getTargetPlaylists();
       this.collection.chain().reject(function(model) {
-        model.set("user", user);
-        model.set("playlists", JSON.stringify(targetPlaylists));
-        model.trigger("onStartUpload");
-        return model.get("complete")
+        return model.get("complete") || function() {
+          model.set("user", user);
+          model.set("playlists", JSON.stringify(targetPlaylists));
+          model.trigger("onStartUpload");
+          return false;
+        }();
       }).each(function(model) {
         model.save(null, {
           success: function(model) {

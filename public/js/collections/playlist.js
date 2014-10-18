@@ -12,14 +12,28 @@ App.Collections.Playlist = Backbone.Collection.extend({
     })
   },
 
-  requestInsertMusic : function(music, ids){
-    var allMusicId = _.first(this.models).id;
+  getTargetPlaylists: function() {
+    return this.chain().filter(function(playlist) {
+      return playlist.get("target_select");
+    }).pluck("id").value();
+  },
+
+  requestInsertMusic: function(music, ids) {
+    console.log(music, ids);
+    var allMusicId = this.first().id;
+    var musicModel = new App.Models.RealMusic(music);
     ids.push(allMusicId);
-    _.each(this.models, function(model){
-      if(_.contains(ids, model.id)){
-      model.get("musics").add(music);
-      }
-    });
+    _.each(ids, function(playlistId) {
+      console.log("playlistId", playlistId);
+      var playlistModel = this.get(playlistId);
+      console.log("playlistModel", playlistModel);
+      if(!playlistModel) return;
+      playlistModel.get("musics").add(musicModel);
+    }, this);
+    // this.each(function(playlistModel){
+    //   if(_.contains(ids, playlistModel.id)){
+    //   playlistModel.get("musics").add(music);
+    //   }
   }
 
 });
