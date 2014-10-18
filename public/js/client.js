@@ -14,10 +14,6 @@
     return instance;
   };
 
-  Client.prototype.connect = function() {
-
-  };
-
   Client.prototype.setListener = function(message, listener) {
     this.socket.on(message, listener);
   }
