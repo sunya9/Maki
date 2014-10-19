@@ -27,13 +27,9 @@ App.Collections.Playlist = Backbone.Collection.extend({
       console.log("playlistId", playlistId);
       var playlistModel = this.get(playlistId);
       console.log("playlistModel", playlistModel);
-      if(!playlistModel) return;
+      if (!playlistModel) return;
       playlistModel.get("musics").add(musicModel);
     }, this);
-    // this.each(function(playlistModel){
-    //   if(_.contains(ids, playlistModel.id)){
-    //   playlistModel.get("musics").add(music);
-    //   }
   }
 
 });

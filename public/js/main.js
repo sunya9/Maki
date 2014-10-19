@@ -20,28 +20,12 @@
 
     events: {
       "submit form#add_user_form": "addUser",
-      "click button#test": "addMusic",
       "click button#change_music_info": "changeMusicInfo",
     },
 
     changeMusicInfo: function() {
       root.playlistCollection.first().get("musics").first().set({
         artist: "xyz"
-      });
-    },
-
-    addMusic: function() {
-      var si = Math.random();
-      this.counter++;
-      var users = ["xyz", "_X_y_z_", "sunya", "observer"];
-      var self = this;
-      _.sample(root.playlistCollection.models).get("musics").add({
-        title: _.sample(users) + "'s song(" + self.counter + ")",
-        artist: _.sample(users),
-        album: _.sample(users) + "'s album",
-        file_name: "none",
-        user: _.sample(users),
-        _id: "erhe" + self.counter
       });
     },
 
@@ -69,16 +53,18 @@
         collection: root.allMusicCollection
       });
 
+      // var dfd = $.Deffered();
+      // this.listenToOnce(root.allMusicCollection,"sync", function(){
+
+      // });
       root.playlistCollection.fetch({
         validate: true,
         remove: false
       });
       this.currentPlaylist = root.playlistCollection.first();
-      this.$main = $("main#main");
 
       var self = this;
       this.client = new App.Classes.Client();
-      this.client.connect();
       this.client.setListener("s2c", function(data) {
         $("</p>").text(data.message).appendTo("output#receive");
       });
@@ -102,10 +88,6 @@
         task();
         this.queue.pop();
       }
-    },
-
-    render: function() {
-      console.log("app render");
     },
 
     addUser: function(e) {

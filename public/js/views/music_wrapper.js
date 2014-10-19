@@ -30,13 +30,16 @@
       this.listenToOnce(this.collection, "sync", function() {
         self.changeMusiclist();
         return this;
-      })
+      });
+      this.listenTo(this.collection, "change", this.render);
       this.client = new App.Classes.Client();
       this.client.setListener("music:create", function(result) {
-        console.log("result:", result);
         var music = result.music;
         var playlists = result.playlists;
         root.playlistCollection.requestInsertMusic(music, playlists);
+      });
+      this.client.setListener("music:remove", function(result){
+        // root.allMusicCollection.
       });
     },
 

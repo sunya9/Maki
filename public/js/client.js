@@ -6,10 +6,6 @@
       instance = this;
       _.extend(this, Backbone.Events);
       this.socket = io(App.WEB_SOCKET_URL);
-      var that = this;
-      this.socket.on("_getAll", function(allMusicData) {
-        that.allMusics = new App.Collections.Musics(allMusicData);
-      });
     }
     return instance;
   };

@@ -13,9 +13,9 @@
     url: "/musics",
 
     initialize: function(models, options) {
-      console.log("music collection initialize.");
-      console.log("music collection models", models);
-      console.log("music collection options", options);
+      // console.log("music collection initialize.");
+      // console.log("music collection models", models);
+      // console.log("music collection options", options);
       if (options && options["real"]) {
         console.log("real model.");
       }

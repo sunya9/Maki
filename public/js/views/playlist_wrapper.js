@@ -12,6 +12,11 @@ App.Views.PlaylistWrapper = Backbone.View.extend({
     console.log("this.collection", this.collection);
     this.collection.each(this.renderOne, this);
     this.listenTo(this.collection, "add", this.renderOne);
+    this.client = new App.Classes.Client();
+    this.client.setListener("playlist:create", function(result) {
+      var playlistModel = new App.Models.Playlist(result);
+      root.playlistCollection.add(playlistModel);
+    });
   },
 
   render: function() {

@@ -6,6 +6,10 @@ App.Models.RealMusic = App.Models.Music.extend({
     console.log("music model initialize.");
     console.log("music model attrs", attrs);
     console.log("music model options", options);
+    if (!attrs.real) {
+      // find model and reference
+      // this = allMusicCollection.get(attrs._id);
+    }
     console.info("music model title", this.attributes.title);
   },
 
@@ -16,9 +20,9 @@ App.Models.RealMusic = App.Models.Music.extend({
       "album_artist": "",
       "album": "",
       "file_name": "",
-      "real" : true,
+      "real": true,
       "user": App.ROOT_USER,
-      "visible" : true
+      "visible": true
     }
   },
 

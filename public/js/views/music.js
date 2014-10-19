@@ -12,8 +12,8 @@
     },
 
     initialize: function(options) {
-      console.log("music view initialize");
-      console.log("music view options", options, this);
+      // console.log("music view initialize");
+      // console.log("music view options", options, this);
       this.parentCollection = options.parentCollection || root.allMusicCollection;
       this.model.set("real", _.isUndefined(options.real) ? true : options.real);
       // console.log("options.parentCollection", options.parentCollection);

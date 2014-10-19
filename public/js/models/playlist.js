@@ -5,15 +5,14 @@
     urlRoot: '/playlists',
 
     initialize: function(attrs, options) {
-      var self = this;
       console.log('playlist model initialize.');
       console.log('playlist model attrs', attrs);
       console.log('playlist model options', options);
       var fetchOptions = {};
-
+      var self = this;
       if (attrs.real) {
         options.removable = true;
-          this.attributes.musics = new App.Collections.Music([], options);
+        this.attributes.musics = new App.Collections.Music([], options);
         console.info("playlist real");
         this.attributes.removable = false;
         fetchOptions.validate = true;
@@ -22,12 +21,26 @@
         this.attributes.musics.fetch(fetchOptions);
       } else {
         // attrs.musics = _.isEmpty(attrs.musics) ? [] : attrs.musics;
-        attrs.musics || ( attrs.musics = []);
-        var options = _.omit(attrs.musics, "musics");
-        this.attributes.musics = new App.Collections.Music(attrs.musics, options);
+        var allMusicCollection = options.collection.first().get("musics");
+        console.log("allMusicCollection", allMusicCollection);
+        var getMusicModels = function() {
+          return _.map(attrs.musics, function(musicId) {
+            return allMusicCollection.get(musicId);
+          });
+        };
+        if (allMusicCollection.isEmpty()) {
+          this.listenToOnce(allMusicCollection, "sync", function() {
+            console.log("listenToOnce");
+            self.attributes.musics.add(getMusicModels());
+            return this;
+          });
+          this.attributes.musics = new App.Collections.Music([], options);
+        } else {
+          this.attributes.musics = new App.Collections.Music(getMusicModels(), options);
+        }
       }
     },
- 
+
     defaults: function() {
       return {
         title: 'No title',
@@ -35,7 +48,7 @@
         musics: null,
         count: 0,
         removable: true,
-        target_select : false,
+        target_select: false,
       }
     },
 
