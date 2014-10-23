@@ -31,7 +31,9 @@
         if (allMusicCollection.isEmpty()) {
           this.listenToOnce(allMusicCollection, "sync", function() {
             console.log("listenToOnce");
-            self.attributes.musics.add(getMusicModels());
+            if (self.attributes.musics.isEmpty()) {
+              self.attributes.musics.add(getMusicModels());
+            }
             return this;
           });
           this.attributes.musics = new App.Collections.Music([], options);
