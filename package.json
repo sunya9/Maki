@@ -14,12 +14,10 @@
     "ect": "~0.5.9",
     "express": "^4.9.5",
     "fluent-ffmpeg": "^2.0.0-rc2",
-    "grunt": "~0.4.5",
     "mongoose": "^3.8.16",
     "morgan": "^1.3.2",
     "mpd": "^1.1.0",
     "multer": "^0.1.4",
-    "search-query-parser": "0.0.2",
     "serve-favicon": "^2.1.5",
     "socket.io": "~1.1.0",
     "underscore": "~1.7.0"
@@ -34,5 +32,11 @@
   "bugs": {
     "url": "https://github.com/sunya9/Maki/issues"
   },
-  "homepage": "https://github.com/sunya9/Maki"
+  "homepage": "https://github.com/sunya9/Maki",
+  "devDependencies": {
+    "grunt": "^0.4.5",
+    "grunt-contrib-jshint": "^0.10.0",
+    "grunt-contrib-watch": "^0.6.1",
+    "grunt-open": "^0.2.3"
+  }
 }
