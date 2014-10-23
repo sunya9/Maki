@@ -49,10 +49,10 @@ app.use(bodyParser.urlencoded({
     extended: false
 }));
 
-
+app.set('url root', pref.prefs.url_root);
 app.set('public', path.join(__dirname, 'public'));
-app.set('static js', '/js/');
-app.set('static css', '/css/');
+app.set('static js', app.get('url root') + 'js/');
+app.set('static css', app.get('url root') + 'css/');
 
 
 app.use(cookieParser());
