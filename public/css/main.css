@@ -1,0 +1,48 @@
+/* line 1, ../_sass/main.scss */
+html {
+  height: 100%;
+  overflow: hidden;
+}
+
+/* line 6, ../_sass/main.scss */
+body {
+  height: 100%;
+  margin: 0;
+}
+
+/* line 11, ../_sass/main.scss */
+div#container {
+  width: 100%;
+  height: 100%;
+  background: #fdf;
+}
+/* line 15, ../_sass/main.scss */
+div#container div#main {
+  height: 100%;
+  display: block;
+  overflow: hidden;
+}
+
+/* line 22, ../_sass/main.scss */
+div#playlists_wrapper {
+  width: 300px;
+  float: left;
+  height: 100%;
+  margin: 10px;
+}
+
+/* line 29, ../_sass/main.scss */
+div#musiclist_wrapper {
+  margin-left: 320px;
+  margin-right: 20px;
+}
+/* line 32, ../_sass/main.scss */
+div#musiclist_wrapper ol#musiclist {
+  height: 500px;
+  overflow: auto;
+}
+
+/* line 39, ../_sass/main.scss */
+div#dialogs_wrapper {
+  display: none;
+}
